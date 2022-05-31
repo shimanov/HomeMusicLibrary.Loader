@@ -16,10 +16,16 @@ await foreach (var item in spotify.Paginate(search.Artists, (s) => s.Artists))
 }
     
 //Выводим инфу по альбому
-var track = await spotify.Artists.GetAlbums("0lVlNsuGaOr9vMHCZIAKMt");
-if (track.Items != null)
-    foreach (var t in track.Items)
+var albums = await spotify.Artists.GetAlbums("0lVlNsuGaOr9vMHCZIAKMt");
+if (albums.Items != null)
+    foreach (var t in albums.Items)
     {
-        Console.WriteLine("Album: {0}\n realise date: {1}\n Type: {2}\n Total Tracks: {3}\n Id: {4}",
+        Console.WriteLine("Album: {0}\n realise date: {1}\n Type: {2}\n Total Tracks: {3}\n Id: {4}\n\n",
             t.Name, t.ReleaseDate, t.Type, t.TotalTracks, t.Id);
     }
+
+var track = await spotify.Albums.GetTracks("5OhAVXSslPqvWkh7XEj4Wq");
+foreach (var t in track.Items)
+{
+    Console.WriteLine("{0}. {1}. {2}", t.TrackNumber, t.Name, t.DurationMs );
+}
