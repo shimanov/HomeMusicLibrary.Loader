@@ -24,8 +24,10 @@ if (albums.Items != null)
             t.Name, t.ReleaseDate, t.Type, t.TotalTracks, t.Id);
     }
 
+//Выводим список треков с альбома
 var track = await spotify.Albums.GetTracks("5OhAVXSslPqvWkh7XEj4Wq");
-foreach (var t in track.Items)
-{
-    Console.WriteLine("{0}. {1}. {2}", t.TrackNumber, t.Name, t.DurationMs );
-}
+if (track.Items != null)
+    foreach (var t in track.Items)
+    {
+        Console.WriteLine("{0}. {1}. {2}", t.TrackNumber, t.Name, t.DurationMs);
+    }
