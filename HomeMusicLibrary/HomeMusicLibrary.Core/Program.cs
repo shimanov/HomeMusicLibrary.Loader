@@ -13,7 +13,7 @@ await search.Artist();
 var album = new AlbumInfo()
 {
     token = "BQCa0HcJkNdLu6zLySpGieAas9cr534rCJtUEc1sW3pxkQ88MdFJ3k75MDQ2d8WR0RfvEq7vEodpDfJJ_M4pHwrZhmbDivjzXz8RA4dwcoS9KMaKsF0daC9z-CjlGpOuGoQIhayyg27JxhJG4gPNHXoLq9MAiy4",
-    albumId = "0lVlNsuGaOr9vMHCZIAKMt"
+    artistId = "0lVlNsuGaOr9vMHCZIAKMt"
 };
 await album.Album();
 

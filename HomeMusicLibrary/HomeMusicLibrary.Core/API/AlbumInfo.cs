@@ -5,12 +5,12 @@ namespace HomeMusicLibrary.Core.API;
 public class AlbumInfo
 {
     public string token;
-    public string albumId;
+    public string artistId;
 
     public async Task Album()
     {
         var spotifyAblum = new SpotifyClient(token);
-        var searchAlbums = await spotifyAblum.Artists.GetAlbums(albumId);
+        var searchAlbums = await spotifyAblum.Artists.GetAlbums(artistId);
         if (searchAlbums.Items != null)
         {
             foreach (var album in searchAlbums.Items)
