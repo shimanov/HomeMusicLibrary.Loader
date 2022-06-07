@@ -5,7 +5,7 @@ using HomeMusicLibrary.Core.API;
 var spToken = new SpotifyToken();
 await spToken.Token();
 
-const string token = "BQD5dxS1IT-otQVylbBo8LQNH8BdGjOwhieaGYeHx2MZ41IPg5MUepoEst3DJA4CJuZXcaVCqOWWEhdWB4guy_tq0D8OWAp2wS3lASCdvwfmOSgKL1vg_15huJCJSrD6DFaGsIzuxwdxO0ASxn1L3lB2kdgDTLE";
+const string token = "BQCre69R-WUxfPytJmqdpljzMoW_8j85-1tc_c73MnXqoRpywK0OpXSgtj9HAAjd1RuOtpGRWYpyiCzoVqs";
 
 var search = new Search
 {
