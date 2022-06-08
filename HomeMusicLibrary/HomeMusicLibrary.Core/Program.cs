@@ -3,27 +3,25 @@
 using HomeMusicLibrary.Core.API;
 
 var spToken = new SpotifyToken();
-await spToken.Token();
-
-const string token = "BQCre69R-WUxfPytJmqdpljzMoW_8j85-1tc_c73MnXqoRpywK0OpXSgtj9HAAjd1RuOtpGRWYpyiCzoVqs";
+string token = await spToken.Token();
 
 var search = new Search
 {
     token = token,
-    artist = "Rammstein"
+    artist = "MajorVoice"
 };
 await search.Artist();
 
 var album = new AlbumInfo()
 {
     token = token,
-    artistId = "0lVlNsuGaOr9vMHCZIAKMt"
+    artistId = "6oBT7BaxDA9UakaNepYMCY"
 };
 await album.Album();
 
 var tracks = new AlbumTracks()
 {
     token = token,
-    albumsId = "5OhAVXSslPqvWkh7XEj4Wq"
+    albumsId = "3h8uLEWJtLmfVXtMEMkvPu"
 };
 await tracks.Tracks();
