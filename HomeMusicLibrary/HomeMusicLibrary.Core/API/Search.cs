@@ -6,17 +6,25 @@ public class Search
     public string token;
     public string artist;
 
-    public async Task<string?> Artist()
+    public async Task Artist()
     {
-        string? result = null;
         var spotify = new SpotifyClient(token);
         var search = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, artist));
         await foreach (var a in spotify.Paginate(search.Artists, (s) => s.Artists))
         {
             if (a.Name != artist) continue;
+            await using (var context = new ApplicationContext())
+            {
+                var artist = new Model.Artist
+                {
+                    ArtistName = a.Name,
+                    ArtistId = a.Id
+                };
+                await context.Artists.AddRangeAsync(artist);
+                await context.SaveChangesAsync();
+            }
+            
             Console.WriteLine("Artist: {0}\n ID: {1}\n", a.Name, a.Id);
-            return a.Name;
         }
-        return result;
     }
 }
