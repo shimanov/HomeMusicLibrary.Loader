@@ -15,6 +15,19 @@ public class AlbumInfo
         {
             foreach (var album in searchAlbums.Items)
             {
+                await using (var context = new ApplicationContext())
+                {
+                    var albumInfo = new Model.AlbumsTable
+                    {
+                        Album = album.Name,
+                        TypeAlbum = album.Type,
+                        RealiseDate = album.ReleaseDate,
+                        TotalTracks = album.TotalTracks,
+                        AlbumId = album.Id,
+                    };
+                    await context.AlbumsTables.AddRangeAsync(albumInfo);
+                    await context.SaveChangesAsync();
+                }
                 Console.WriteLine("Album: {0}\n realise date: {1}\n Type: {2}\n Total Tracks: {3}\n Id: {4}\n\n",
                                  album.Name, album.ReleaseDate, album.Type, album.TotalTracks, album.Id);
             }
