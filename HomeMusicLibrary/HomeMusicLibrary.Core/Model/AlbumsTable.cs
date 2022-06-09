@@ -13,7 +13,7 @@ public class AlbumsTable
     
     public string TypeAlbum { get; set; }
     
-    public DateTime RealiseDate { get; set; }
+    public string RealiseDate { get; set; }
     
     public int TotalTracks { get; set; }
     
