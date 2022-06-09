@@ -13,6 +13,7 @@ public class AlbumInfo
         var searchAlbums = await spotifyAblum.Artists.GetAlbums(artistId);
         if (searchAlbums.Items != null)
         {
+            //Save data album in datebase
             foreach (var album in searchAlbums.Items)
             {
                 await using (var context = new ApplicationContext())
@@ -30,6 +31,24 @@ public class AlbumInfo
                 }
                 Console.WriteLine("Album: {0}\n realise date: {1}\n Type: {2}\n Total Tracks: {3}\n Id: {4}\n\n",
                                  album.Name, album.ReleaseDate, album.Type, album.TotalTracks, album.Id);
+            }
+            
+            //Save link on cover album in database
+            foreach (var item in searchAlbums.Items)
+            {
+                foreach (var image in item.Images)
+                {
+                    await using (var context = new ApplicationContext())
+                    {
+                        var albumImage = new Model.AlbumsTable()
+                        {
+                            CoverAlbum = image.Url
+                        };
+                        await context.AlbumsTables.AddRangeAsync(albumImage);
+                        await context.SaveChangesAsync();
+                    }
+                }
+                
             }
         }
     }
