@@ -13,9 +13,21 @@ public class AlbumTracks
         var searchTracks = await spotifyTracks.Albums.GetTracks(albumsId);
         if (searchTracks.Items != null)
         {
-            foreach (var track in searchTracks.Items)
+            foreach (var tracks in searchTracks.Items)
             {
-                Console.WriteLine("{0}. {1}. {2}", track.TrackNumber, track.Name, track.DurationMs);
+                await using (var context = new ApplicationContext())
+                {
+                    var track = new Model.AlbumTracksTable
+                    {
+                        AlbumId = tracks.Id,
+                        TrackNumber = tracks.TrackNumber,
+                        TrackName = tracks.Name,
+                        Duration = tracks.DurationMs
+                    };
+                    await context.TracksTables.AddRangeAsync(track);
+                    await context.SaveChangesAsync();
+                }
+                // Console.WriteLine("{0}. {1}. {2}", tracks.TrackNumber, tracks.Name, tracks.DurationMs);
             }
         }
     }
