@@ -16,7 +16,7 @@ public class ApplicationContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql("server=localhost;user=root;password=123456789;database=usersdb;",
-            new MariaDbServerVersion(new Version(8, 0, 25)));
+        optionsBuilder.UseMySql("server=192.168.1.200;user=sa;password=qwep[]ghjB1;database=HomeMusicLibrary;",
+            new MariaDbServerVersion(new Version(10, 8, 3)));
     }
 }
