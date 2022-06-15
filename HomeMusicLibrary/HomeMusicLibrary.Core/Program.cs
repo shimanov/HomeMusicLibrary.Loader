@@ -5,6 +5,11 @@ using HomeMusicLibrary.Core.API;
 var spToken = new SpotifyToken();
 string token = await spToken.Token();
 
+//Шаг 1. Ищем исполнителя из файла и сохраняем в бд
+//Шаг 2. Берем из БД ID артиста и находим все альбомы
+//Шаг 3. Берем ID альбома и ищем его
+
+
 var search = new Search
 {
     token = token,

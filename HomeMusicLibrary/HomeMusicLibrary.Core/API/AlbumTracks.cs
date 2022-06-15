@@ -19,6 +19,7 @@ public class AlbumTracks
                 {
                     var track = new Model.AlbumTracksTable
                     {
+                        Id = Guid.NewGuid().ToString(),
                         AlbumId = tracks.Id,
                         TrackNumber = tracks.TrackNumber,
                         TrackName = tracks.Name,

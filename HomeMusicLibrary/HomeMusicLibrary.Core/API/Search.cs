@@ -17,6 +17,7 @@ public class Search
             {
                 var artist = new Model.Artist
                 {
+                    Id = Guid.NewGuid().ToString(),
                     ArtistName = a.Name,
                     ArtistId = a.Id
                 };
