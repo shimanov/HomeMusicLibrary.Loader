@@ -54,8 +54,8 @@ using (ApplicationContext db = new ApplicationContext())
     }
     
     //Step 3
-    var tracks = db.TracksTables.ToList();
-    foreach (AlbumTracksTable track in tracks)
+    var tracks = db.AlbumsTables.ToList();
+    foreach (AlbumsTable track in tracks)
     {
         var tr = new AlbumTracks()
         {

@@ -28,7 +28,7 @@ public class AlbumTracks
                     await context.TracksTables.AddRangeAsync(track);
                     await context.SaveChangesAsync();
                 }
-                // Console.WriteLine("{0}. {1}. {2}", tracks.TrackNumber, tracks.Name, tracks.DurationMs);
+                Console.WriteLine("{0}. {1}. {2}", tracks.TrackNumber, tracks.Name, tracks.DurationMs);
             }
         }
     }
