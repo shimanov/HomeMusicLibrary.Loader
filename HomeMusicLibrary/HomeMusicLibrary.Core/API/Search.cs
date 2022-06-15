@@ -12,7 +12,7 @@ public class Search
         var search = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, artist));
         await foreach (var a in spotify.Paginate(search.Artists, (s) => s.Artists))
         {
-            if (artist.Equals(a.Name))
+            if (artist.Equals(a.Name.ToLower()))
             {
                 await using (var context = new ApplicationContext())
                 {
