@@ -5,7 +5,7 @@ namespace HomeMusicLibrary.Core.Model;
 public class AlbumsTable
 {
     [Key, Required]
-    public int Id { get; set; }
+    public string Id { get; set; }
     
     public string ArtistId { get; set; }
     
