@@ -1,37 +1,65 @@
+using Spectre.Console;
+
 namespace HomeMusicLibrary.Core.API;
 using SpotifyAPI.Web;
 
 public class Search
 {
     public string token;
-    public string artist;
+    string artist;
 
     public async Task Artist()
     {
-        var spotify = new SpotifyClient(token);
-        var search = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, artist));
-        await foreach (var a in spotify.Paginate(search.Artists, (s) => s.Artists))
+        var rule = new Rule("[chartreuse1]Добавление исполнителя в БД[/]")
         {
-            if (artist.Equals(a.Name.ToLower()))
+            Alignment = Justify.Left
+        };
+        AnsiConsole.Write(rule);
+
+        string[] art = File.ReadAllLines(Environment.CurrentDirectory + @"/art.txt");
+        if (art.Length != 0)
+        {
+            foreach (string s in art)
             {
-                await using (var context = new ApplicationContext())
+                artist = s;
+                var spotify = new SpotifyClient(token);
+                var search = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, artist));
+                await foreach (var a in spotify.Paginate(search.Artists, (s) => s.Artists))
                 {
-                    var artist = new Model.Artist
+                    if (artist.Equals(a.Name.ToLower()))
                     {
-                        Id = Guid.NewGuid().ToString(),
-                        ArtistName = a.Name,
-                        ArtistId = a.Id,
-                    };
-                    await context.Artists.AddRangeAsync(artist);
-                    await context.SaveChangesAsync();
+                        await using (var context = new ApplicationContext())
+                        {
+                            var artist = new Model.Artist
+                            {
+                                Id = Guid.NewGuid().ToString(),
+                                ArtistName = a.Name,
+                                ArtistId = a.Id,
+                            };
+                            try
+                            {
+                                await context.Artists.AddRangeAsync(artist);
+                                await context.SaveChangesAsync();
+                            }
+                            catch (Exception e)
+                            {
+                                AnsiConsole.WriteException(e);
+                            }
+                        }
+                        AnsiConsole.WriteLine("Artist: {0}\n ID: {1}\n", a.Name, a.Id);
+                    }
+                    else
+                    {
+                        AnsiConsole.WriteLine("Совпадений не найдено");
+                    }
                 }
-                Console.WriteLine("Artist: {0}\n ID: {1}\n", a.Name, a.Id);
             }
-            else
-            {
-                Console.WriteLine("Совпадений не найдено");
-            }
-            
         }
+        else
+        {
+            AnsiConsole.WriteLine("[yellow3]Нет данных для поиска[/]");
+        }
+        
+        
     }
 }

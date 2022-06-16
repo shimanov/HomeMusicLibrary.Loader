@@ -5,6 +5,7 @@ using System.Threading.Channels;
 using HomeMusicLibrary.Core;
 using HomeMusicLibrary.Core.API;
 using HomeMusicLibrary.Core.Model;
+using Spectre.Console;
 
 Stopwatch stopwatch = new Stopwatch();
 stopwatch.Start();
@@ -17,24 +18,14 @@ string token = await spToken.Token();
 //Шаг 3. Берем ID альбома и ищем его
 
 //Step 1
-string[] art = File.ReadAllLines(Environment.CurrentDirectory + @"/art.txt");
-foreach (string s in art)
+var searchArt = new Search()
 {
-    if (s != string.Empty)
-    {
-        string name = s;
-        var searchArt = new Search()
-        {
-            token = token,
-            artist = name
-        };
-        await searchArt.Artist();  
-    }
-    else
-    {
-        Console.WriteLine("Нет данных для поиска");
-    }
-}
+    token = token
+};
+await searchArt.Artist();
+
+
+
 
 
 //Step 2
