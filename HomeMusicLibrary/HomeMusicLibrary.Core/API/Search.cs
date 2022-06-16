@@ -40,17 +40,15 @@ public class Search
                             {
                                 await context.Artists.AddRangeAsync(artist);
                                 await context.SaveChangesAsync();
+                                AnsiConsole.MarkupLine("Artist: {0}\n ID: {1}\n [thistle1]:check_mark_button: Записано в таблицу\n\n[/]", 
+                                    a.Name, a.Id);
                             }
                             catch (Exception e)
                             {
                                 AnsiConsole.WriteException(e);
                             }
                         }
-                        AnsiConsole.WriteLine("Artist: {0}\n ID: {1}\n", a.Name, a.Id);
-                    }
-                    else
-                    {
-                        AnsiConsole.WriteLine("Совпадений не найдено");
+                        
                     }
                 }
             }
