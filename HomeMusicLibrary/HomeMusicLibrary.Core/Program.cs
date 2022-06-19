@@ -14,14 +14,14 @@ var menu = AnsiConsole.Prompt(
         .MoreChoicesText("[grey]Подсказочка[/]")
         .AddChoices(new []
         {
-          "Добавить новых исполнителей из файла",
-          "Добавить нового исполнителя",
-          "Добавить новые вышедшие альбомы"
+          ":muted_speaker: Добавить новых исполнителей из файла",
+          ":musical_note: Добавить нового исполнителя",
+          ":musical_notes: Добавить новые вышедшие альбомы"
         }));
-AnsiConsole.WriteLine(menu);
 
 
-    Stopwatch stopwatch = new Stopwatch();
+Stopwatch stopwatch = new Stopwatch();
+stopwatch.Start();
 var spToken = new SpotifyToken();
 string token = await spToken.Token();
 
@@ -29,60 +29,65 @@ string token = await spToken.Token();
 //Шаг 2. Берем из БД ID артиста и находим все альбомы
 //Шаг 3. Берем ID альбома и ищем его
 
-stopwatch.Start();
 //Step 1
-var rules = new Rule("[chartreuse1]Добавление исполнителя в БД[/]")
+if (menu == ":muted_speaker: Добавить новых исполнителей из файла")
 {
-    Alignment = Justify.Left
-};
-AnsiConsole.Write(rules);
-var searchArt = new Search()
-{
-    token = token
-};
-await searchArt.Artist();
+    var rules = new Rule("[chartreuse1]Добавление исполнителя в БД[/]")
+    {
+        Alignment = Justify.Left
+    };
+    AnsiConsole.Write(rules);
+    
+    var searchArt = new Search()
+    {
+        token = token
+    };
+    await searchArt.Artist();
+    AnsiConsole.MarkupLine("[mediumpurple2]Новые исполнители добавлены БД[/]");
+}
+
 
 //Step 2
-var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
-{
-    Alignment = Justify.Left
-};
-AnsiConsole.Write(rule);
-using (ApplicationContext db = new ApplicationContext())
-{
-    var artists = db.Artists.ToList();
-    foreach (Artist a in artists)
-    {
-        var album = new AlbumInfo()
-        {
-            token = token,
-            artistId = a.ArtistId
-        };
-        await album.Album();
-        
-        Console.WriteLine(a.ArtistId);
-    }
-}
+// var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
+// {
+//     Alignment = Justify.Left
+// };
+// AnsiConsole.Write(rule);
+// using (ApplicationContext db = new ApplicationContext())
+// {
+//     var artists = db.Artists.ToList();
+//     foreach (Artist a in artists)
+//     {
+//         var album = new AlbumInfo()
+//         {
+//             token = token,
+//             artistId = a.ArtistId
+//         };
+//         await album.Album();
+//         
+//         Console.WriteLine(a.ArtistId);
+//     }
+// }
 
 //Step 3
-var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
-{
-    Alignment = Justify.Left
-};
-AnsiConsole.Write(rul);
-using (ApplicationContext db = new ApplicationContext())
-{
-    var tracks = db.AlbumsTables.ToList();
-    foreach (AlbumsTable track in tracks)
-    {
-        var tr = new AlbumTracks()
-        {
-            token = token,
-            albumsId = track.AlbumId
-        };
-        await tr.Tracks();
-    }
-}
+// var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
+// {
+//     Alignment = Justify.Left
+// };
+// AnsiConsole.Write(rul);
+// using (ApplicationContext db = new ApplicationContext())
+// {
+//     var tracks = db.AlbumsTables.ToList();
+//     foreach (AlbumsTable track in tracks)
+//     {
+//         var tr = new AlbumTracks()
+//         {
+//             token = token,
+//             albumsId = track.AlbumId
+//         };
+//         await tr.Tracks();
+//     }
+// }
 
 stopwatch.Stop();
 TimeSpan timeSpan = stopwatch.Elapsed;
