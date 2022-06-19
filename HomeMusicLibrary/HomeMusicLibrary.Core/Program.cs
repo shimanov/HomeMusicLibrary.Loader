@@ -1,7 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
-using System.Threading.Channels;
 using HomeMusicLibrary.Core;
 using HomeMusicLibrary.Core.API;
 using HomeMusicLibrary.Core.Model;
@@ -18,6 +17,11 @@ string token = await spToken.Token();
 //Шаг 3. Берем ID альбома и ищем его
 
 //Step 1
+var rules = new Rule("[chartreuse1]Добавление исполнителя в БД[/]")
+{
+    Alignment = Justify.Left
+};
+AnsiConsole.Write(rules);
 var searchArt = new Search()
 {
     token = token
@@ -25,6 +29,11 @@ var searchArt = new Search()
 await searchArt.Artist();
 
 //Step 2
+var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
+{
+    Alignment = Justify.Left
+};
+AnsiConsole.Write(rule);
 using (ApplicationContext db = new ApplicationContext())
 {
     var artists = db.Artists.ToList();

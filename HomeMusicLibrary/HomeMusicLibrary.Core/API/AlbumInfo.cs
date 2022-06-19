@@ -10,12 +10,6 @@ public class AlbumInfo
 
     public async Task Album()
     {
-        var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
-        {
-            Alignment = Justify.Left
-        };
-        AnsiConsole.Write(rule);
-        
         var spotifyAblum = new SpotifyClient(token);
         var searchAlbums = await spotifyAblum.Artists.GetAlbums(artistId);
         if (searchAlbums.Items != null)

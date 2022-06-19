@@ -10,12 +10,6 @@ public class Search
 
     public async Task Artist()
     {
-        var rule = new Rule("[chartreuse1]Добавление исполнителя в БД[/]")
-        {
-            Alignment = Justify.Left
-        };
-        AnsiConsole.Write(rule);
-
         string[] art = File.ReadAllLines(Environment.CurrentDirectory + @"/art.txt");
         if (art.Length != 0)
         {
