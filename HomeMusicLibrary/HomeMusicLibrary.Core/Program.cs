@@ -6,9 +6,22 @@ using HomeMusicLibrary.Core.API;
 using HomeMusicLibrary.Core.Model;
 using Spectre.Console;
 
-Stopwatch stopwatch = new Stopwatch();
-stopwatch.Start();
+//Menu
+var menu = AnsiConsole.Prompt(
+    new SelectionPrompt<string>()
+        .Title("Что необходимо сделать?")
+        .PageSize(10)
+        .MoreChoicesText("[grey]Подсказочка[/]")
+        .AddChoices(new []
+        {
+          "Добавить новых исполнителей из файла",
+          "Добавить нового исполнителя",
+          "Добавить новые вышедшие альбомы"
+        }));
+AnsiConsole.WriteLine(menu);
 
+
+    Stopwatch stopwatch = new Stopwatch();
 var spToken = new SpotifyToken();
 string token = await spToken.Token();
 
@@ -16,6 +29,7 @@ string token = await spToken.Token();
 //Шаг 2. Берем из БД ID артиста и находим все альбомы
 //Шаг 3. Берем ID альбома и ищем его
 
+stopwatch.Start();
 //Step 1
 var rules = new Rule("[chartreuse1]Добавление исполнителя в БД[/]")
 {
@@ -48,8 +62,16 @@ using (ApplicationContext db = new ApplicationContext())
         
         Console.WriteLine(a.ArtistId);
     }
-    
-    //Step 3
+}
+
+//Step 3
+var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
+{
+    Alignment = Justify.Left
+};
+AnsiConsole.Write(rul);
+using (ApplicationContext db = new ApplicationContext())
+{
     var tracks = db.AlbumsTables.ToList();
     foreach (AlbumsTable track in tracks)
     {
