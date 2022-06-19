@@ -1,3 +1,4 @@
+using Spectre.Console;
 using SpotifyAPI.Web;
 
 namespace HomeMusicLibrary.Core.API;
@@ -9,6 +10,12 @@ public class AlbumInfo
 
     public async Task Album()
     {
+        var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
+        {
+            Alignment = Justify.Left
+        };
+        AnsiConsole.Write(rule);
+        
         var spotifyAblum = new SpotifyClient(token);
         var searchAlbums = await spotifyAblum.Artists.GetAlbums(artistId);
         if (searchAlbums.Items != null)
@@ -45,11 +52,20 @@ public class AlbumInfo
                         TotalTracks = album.TotalTracks,
                         AlbumId = album.Id,
                     };
-                    await context.AlbumsTables.AddRangeAsync(albumInfo);
-                    await context.SaveChangesAsync();
+                    try
+                    {
+                        await context.AlbumsTables.AddRangeAsync(albumInfo);
+                        await context.SaveChangesAsync();
+                        AnsiConsole.MarkupLine("Album: {0}\n realise date: {1}\n Type: {2}\n Total Tracks: {3}\n Id: {4}\n\n " +
+                                               "[thistle1]:check_mark_button: Записано в таблицу\n\n[/]",
+                            album.Name, album.ReleaseDate, album.Type, album.TotalTracks, album.Id);
+                    }
+                    catch (Exception e)
+                    {
+                        AnsiConsole.WriteException(e);
+                    }
                 }
-                Console.WriteLine("Album: {0}\n realise date: {1}\n Type: {2}\n Total Tracks: {3}\n Id: {4}\n\n",
-                                 album.Name, album.ReleaseDate, album.Type, album.TotalTracks, album.Id);
+                
             }
         }
     }
