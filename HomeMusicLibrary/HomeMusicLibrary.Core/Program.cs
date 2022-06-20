@@ -48,46 +48,46 @@ if (menu == ":muted_speaker: Добавить новых исполнителе�
 
 
 //Step 2
-// var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
-// {
-//     Alignment = Justify.Left
-// };
-// AnsiConsole.Write(rule);
-// using (ApplicationContext db = new ApplicationContext())
-// {
-//     var artists = db.Artists.ToList();
-//     foreach (Artist a in artists)
-//     {
-//         var album = new AlbumInfo()
-//         {
-//             token = token,
-//             artistId = a.ArtistId
-//         };
-//         await album.Album();
-//         
-//         Console.WriteLine(a.ArtistId);
-//     }
-// }
+var rule = new Rule("[chartreuse1]Добавление списка альбомов в БД[/]")
+{
+    Alignment = Justify.Left
+};
+AnsiConsole.Write(rule);
+using (ApplicationContext db = new ApplicationContext())
+{
+    var artists = db.Artists.ToList();
+    foreach (Artist a in artists)
+    {
+        var album = new AlbumInfo()
+        {
+            token = token,
+            artistId = a.ArtistId
+        };
+        await album.Album();
+        
+        Console.WriteLine(a.ArtistId);
+    }
+}
 
 //Step 3
-// var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
-// {
-//     Alignment = Justify.Left
-// };
-// AnsiConsole.Write(rul);
-// using (ApplicationContext db = new ApplicationContext())
-// {
-//     var tracks = db.AlbumsTables.ToList();
-//     foreach (AlbumsTable track in tracks)
-//     {
-//         var tr = new AlbumTracks()
-//         {
-//             token = token,
-//             albumsId = track.AlbumId
-//         };
-//         await tr.Tracks();
-//     }
-// }
+var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
+{
+    Alignment = Justify.Left
+};
+AnsiConsole.Write(rul);
+using (ApplicationContext db = new ApplicationContext())
+{
+    var tracks = db.AlbumsTables.ToList();
+    foreach (AlbumsTable track in tracks)
+    {
+        var tr = new AlbumTracks()
+        {
+            token = token,
+            albumsId = track.AlbumId
+        };
+        await tr.Tracks();
+    }
+}
 
 stopwatch.Stop();
 TimeSpan timeSpan = stopwatch.Elapsed;

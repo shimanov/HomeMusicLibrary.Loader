@@ -11,6 +11,7 @@ public class ApplicationContext : DbContext
 
     public ApplicationContext()
     {
+        Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 
@@ -18,5 +19,10 @@ public class ApplicationContext : DbContext
     {
         optionsBuilder.UseMySql("server=192.168.1.200;user=sa;password=qwep[]ghjB1;database=HomeMusicLibrary;",
             new MariaDbServerVersion(new Version(10, 8, 3)));
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
     }
 }
