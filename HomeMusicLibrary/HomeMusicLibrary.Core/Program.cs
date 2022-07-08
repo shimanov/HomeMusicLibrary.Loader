@@ -48,26 +48,30 @@ if (menu == ":muted_speaker: Добавить новых исполнителе�
 
 
 //Step 2
-//
-// {
-//     Alignment = Justify.Left
-// };
-// AnsiConsole.Write(rule);
-// using (ApplicationContext db = new ApplicationContext())
-// {
-//     var artists = db.Artists.ToList();
-//     foreach (Artist a in artists)
-//     {
-//         var album = new AlbumInfo()
-//         {
-//             token = token,
-//             artistId = a.ArtistId
-//         };
-//         await album.Album();
-//         
-//         Console.WriteLine(a.ArtistId);
-//     }
-// }
+if (menu == ":musical_notes: Добавить новые вышедшие альбомы")
+{
+    var rule = new Rule("[chartreuse1]Добавление альбомов в БД[/]")
+    {
+        Alignment = Justify.Left
+    };
+    AnsiConsole.Write(rule);
+    using (ApplicationContext db = new ApplicationContext())
+    {
+        var artists = db.Artists.ToList();
+        foreach (Artist a in artists)
+        {
+            var album = new AlbumInfo()
+            {
+                token = token,
+                artistId = a.ArtistId
+            };
+            await album.Album();
+       
+            Console.WriteLine(a.ArtistId);
+        }
+    }
+    AnsiConsole.MarkupLine("[mediumpurple2]Новые альбомы добавлены БД[/]");
+}
 
 //Step 3
 // var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")

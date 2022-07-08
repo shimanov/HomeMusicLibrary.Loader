@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeMusicLibrary.Core;
 
-public class ApplicationContext : DbContext
+public sealed class ApplicationContext : DbContext
 {
     public DbSet<Artist> Artists { get; set; } = null!;
     public DbSet<AlbumsTable> AlbumsTables { get; set; } = null!;

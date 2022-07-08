@@ -17,39 +17,47 @@ public class Search
             {
                 artist = s;
                 var spotify = new SpotifyClient(token);
-                var search = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, artist));
-                await foreach (var a in spotify.Paginate(search.Artists, (s) => s.Artists))
+                try
                 {
-                    if (s == a.Name)
+                    var search = await spotify.Search.Item(new SearchRequest(SearchRequest.Types.Artist, artist));
+                    await foreach (var a in spotify.Paginate(search.Artists, (s) => s.Artists))
                     {
-                        await using (var context = new ApplicationContext())
+                        if (s == a.Name)
                         {
+                            await using var context = new ApplicationContext();
                             var artist = new Model.Artist
                             {
                                 Id = Guid.NewGuid().ToString(),
                                 ArtistName = a.Name,
-                                ArtistId = a.Id,
+                                ArtistId = a.Id
                             };
                             try
                             {
                                 await context.Artists.AddRangeAsync(artist);
                                 await context.SaveChangesAsync();
-                                AnsiConsole.MarkupLine("Artist: {0}\n ID: {1}\n [thistle1]:check_mark_button: Записано в таблицу\n\n[/]", 
+                                AnsiConsole.MarkupLine("Artist: {0}\n ID: {1}\n [thistle1]:check_mark_button: Записано в таблицу\n[/]", 
                                     a.Name, a.Id);
+                                //AnsiConsole.MarkupLine("[cyan1]:sleeping_face: Спим 5 секунд\n [/]");
+                                //Thread.Sleep(5000);
                             }
                             catch (Exception e)
                             {
                                 AnsiConsole.WriteException(e);
                             }
                         }
-                        
                     }
                 }
+                catch (APIException e)
+                {
+                    AnsiConsole.WriteLine(e.Message);
+                    AnsiConsole.WriteLine(e.Response?.StatusCode.ToString() ?? string.Empty);
+                }
+                
             }
         }
         else
         {
-            AnsiConsole.WriteLine("[yellow3]Нет данных для поиска[/]");
+            AnsiConsole.WriteLine("[yellow3] Нет данных для поиска[/]");
         }
         
         
