@@ -13,4 +13,13 @@ public class Artist
     
     [AllowNull]
     public string ArtistId { get; set; }
+
+    public List<ArtistImages> ArtistImagesList { get; set; }
+}
+
+public class ArtistImages
+{
+    public int Height { get; set; }
+    public int Width { get; set; }
+    public string Url { get; set; }
 }
