@@ -1,9 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
-using HomeMusicLibrary.Core;
-using HomeMusicLibrary.Core.API;
-using HomeMusicLibrary.Core.Model;
+using HomeMusicLibrary.Loader;
+using HomeMusicLibrary.Loader.API;
+using HomeMusicLibrary.Loader.Model;
 using Spectre.Console;
 
 //Menu
@@ -16,7 +16,8 @@ var menu = AnsiConsole.Prompt(
         {
           ":muted_speaker: Добавить новых исполнителей из файла",
           ":musical_note: Добавить нового исполнителя",
-          ":musical_notes: Добавить новые вышедшие альбомы"
+          ":musical_notes: Добавить новые вышедшие альбомы",
+          "Debug"
         }));
 
 
@@ -92,6 +93,13 @@ if (menu == ":musical_notes: Добавить новые вышедшие аль
 //         await tr.Tracks();
 //     }
 // }
+
+//Debug
+if (menu == "")
+{
+    
+}
+
 
 stopwatch.Stop();
 TimeSpan timeSpan = stopwatch.Elapsed;

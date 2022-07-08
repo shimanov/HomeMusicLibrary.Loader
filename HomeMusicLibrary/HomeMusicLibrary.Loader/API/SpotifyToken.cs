@@ -1,4 +1,4 @@
-namespace HomeMusicLibrary.Core.API;
+namespace HomeMusicLibrary.Loader.API;
 using SpotifyAPI.Web;
 
 public class SpotifyToken

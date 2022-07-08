@@ -1,12 +1,13 @@
 using Spectre.Console;
 
-namespace HomeMusicLibrary.Core.API;
+namespace HomeMusicLibrary.Loader.API;
 using SpotifyAPI.Web;
 
 public class Search
 {
     public string token;
     string artist;
+    private string url;
 
     public async Task Artist()
     {
@@ -24,12 +25,20 @@ public class Search
                     {
                         if (s == a.Name)
                         {
+                            foreach (var img in a.Images)
+                            {
+                                if (img.Height == 300)
+                                {
+                                    url = img.Url;
+                                }
+                            }
                             await using var context = new ApplicationContext();
                             var artist = new Model.Artist
                             {
                                 Id = Guid.NewGuid().ToString(),
                                 ArtistName = a.Name,
-                                ArtistId = a.Id
+                                ArtistId = a.Id,
+                                Img = url
                             };
                             try
                             {

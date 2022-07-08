@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
-namespace HomeMusicLibrary.Core.Model;
+namespace HomeMusicLibrary.Loader.Model;
 
 public class AlbumTracksTable
 {

@@ -1,7 +1,7 @@
-using HomeMusicLibrary.Core.Model;
+using HomeMusicLibrary.Loader.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeMusicLibrary.Core;
+namespace HomeMusicLibrary.Loader;
 
 public sealed class ApplicationContext : DbContext
 {

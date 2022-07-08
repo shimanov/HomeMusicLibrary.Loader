@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMusicLibrary.Core", "HomeMusicLibrary.Core\HomeMusicLibrary.Core.csproj", "{5714EC3A-A1E6-4B7F-B509-ADB6848F4E13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMusicLibrary.Loader", "HomeMusicLibrary.Loader\HomeMusicLibrary.Loader.csproj", "{5714EC3A-A1E6-4B7F-B509-ADB6848F4E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

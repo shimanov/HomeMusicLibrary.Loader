@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace HomeMusicLibrary.Core.Migrations
+namespace HomeMusicLibrary.Loader.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -44,6 +44,8 @@ namespace HomeMusicLibrary.Core.Migrations
                     ArtistName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ArtistId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Img = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>

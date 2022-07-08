@@ -1,6 +1,6 @@
 using SpotifyAPI.Web;
 
-namespace HomeMusicLibrary.Core.API;
+namespace HomeMusicLibrary.Loader.API;
 
 public class AlbumTracks
 {
