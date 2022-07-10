@@ -15,12 +15,4 @@ public class Artist
     public string ArtistId { get; set; }
 
     public string Img { get; set; }
-    //public List<ArtistImage> ArtistImagesList { get; set; }
 }
-
-// public class ArtistImage
-// {
-//     public int Height { get; set; }
-//     public int Width { get; set; }
-//     public string Url { get; set; }
-// }

@@ -14,23 +14,6 @@ public class AlbumInfo
         var searchAlbums = await spotifyAblum.Artists.GetAlbums(artistId);
         if (searchAlbums.Items != null)
         {
-            //Save link on cover album in database
-            // foreach (var item in searchAlbums.Items)
-            // {
-            //     foreach (var image in item.Images)
-            //     {
-            //         await using (var context = new ApplicationContext())
-            //         {
-            //             var albumImage = new Model.AlbumsTable()
-            //             {
-            //                 CoverAlbum = image.Url
-            //             };
-            //             await context.AlbumsTables.AddRangeAsync(albumImage);
-            //             await context.SaveChangesAsync();
-            //         }
-            //     }
-            // }
-            
             //Save data album in datebase
             foreach (var album in searchAlbums.Items)
             {

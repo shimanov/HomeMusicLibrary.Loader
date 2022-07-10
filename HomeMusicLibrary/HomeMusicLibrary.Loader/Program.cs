@@ -9,15 +9,14 @@ using Spectre.Console;
 //Menu
 var menu = AnsiConsole.Prompt(
     new SelectionPrompt<string>()
-        .Title("Что необходимо сделать?")
+        .Title("\nЧто необходимо сделать?\n")
         .PageSize(10)
         .MoreChoicesText("[grey]Подсказочка[/]")
         .AddChoices(new []
         {
           ":muted_speaker: Добавить новых исполнителей из файла",
-          ":musical_note: Добавить нового исполнителя",
           ":musical_notes: Добавить новые вышедшие альбомы",
-          "Debug"
+          ":musical_notes: Добавить треки"
         }));
 
 
@@ -75,31 +74,28 @@ if (menu == ":musical_notes: Добавить новые вышедшие аль
 }
 
 //Step 3
-// var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
-// {
-//     Alignment = Justify.Left
-// };
-// AnsiConsole.Write(rul);
-// using (ApplicationContext db = new ApplicationContext())
-// {
-//     var tracks = db.AlbumsTables.ToList();
-//     foreach (AlbumsTable track in tracks)
-//     {
-//         var tr = new AlbumTracks()
-//         {
-//             token = token,
-//             albumsId = track.AlbumId
-//         };
-//         await tr.Tracks();
-//     }
-// }
-
-//Debug
-if (menu == "")
+if (menu == ":musical_notes: Добавить треки")
 {
-    
+    var rul = new Rule("[chartreuse1]Добавление треков в БД[/]")
+    {
+        Alignment = Justify.Left
+    };
+    AnsiConsole.Write(rul);
+    using (ApplicationContext db = new ApplicationContext())
+    {
+        var tracks = db.AlbumsTables.ToList();
+        foreach (AlbumsTable track in tracks)
+        {
+            var tr = new AlbumTracks()
+            {
+                token = token,
+                albumsId = track.AlbumId
+            };
+            await tr.Tracks();
+        }
+    }
+    AnsiConsole.MarkupLine("[mediumpurple2]Новые треки добавлены в БД[/]");
 }
-
 
 stopwatch.Stop();
 TimeSpan timeSpan = stopwatch.Elapsed;
