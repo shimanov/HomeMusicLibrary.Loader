@@ -1,4 +1,6 @@
-<div style="width:100%;height:0;padding-bottom:100%;position:relative;"><iframe src="https://giphy.com/embed/xTiTnnnWvRXTeXx3wc" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/animation-guitar-instrument-xTiTnnnWvRXTeXx3wc">via GIPHY</a></p>
+<div style="width:100%;height:0;padding-bottom:100%;position:relative;">
+	<img src="https://giphy.com/embed/xTiTnnnWvRXTeXx3wc" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen/>
+</div>
 ## HomeMusicLibrary
 
 Это консольное приложение для создания личной библиотеки музыки. 
