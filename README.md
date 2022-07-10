@@ -1,4 +1,4 @@
-<div style="width:100%;height:0;padding-bottom:100%;position:relative;">
+<div style="width:50%;height:0;padding-bottom:100%;position:center;">
 	<img src="https://media.giphy.com/media/xTiTnnnWvRXTeXx3wc/giphy.gif"/>
 </div>
 ## HomeMusicLibrary
